@@ -1,0 +1,16 @@
+---
+import { stats } from '../data/department';
+---
+<div class="intro">
+  <div class="wrap">
+    <div class="photo hero-photo has-img">
+      <img src="/Photos/nc-at_09399-min-gigapixel-low resolution v2-1x-faceai v2.jpeg" alt="NC A&T chemistry students in white lab coats at the department's outreach booth, with Aggie blue and gold backdrop" fetchpriority="high" decoding="async" />
+      <span class="cap">NC A&amp;T Chemistry students at a department showcase</span>
+    </div>
+    <div class="stats" role="list" aria-label="Department at a glance">
+      {stats.map((s) => (
+        <div class="stat" role="listitem"><span class="n">{s.n}<span class="u">{s.u}</span></span><div class="l" set:html={s.l} /></div>
+      ))}
+    </div>
+  </div>
+</div>

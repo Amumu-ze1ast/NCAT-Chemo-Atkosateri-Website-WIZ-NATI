@@ -1,0 +1,66 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ChairMessage from '../components/ChairMessage.astro';
+import NextStep from '../components/NextStep.astro';
+import { areasOfImpact, contacts } from '../data/department';
+---
+<SiteLayout title="About · Department of Chemistry · NC A&T">
+  <PageHeader eyebrow="About the department" title="A community of <span class='g'>discovery.</span>" crumb="About"
+    intro="Within the College of Science and Technology at North Carolina A&T — the nation's largest HBCU — we pair ACS-certified training with hands-on research from year one." />
+
+  <section>
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Mission & vision</span><h2>Why we exist</h2></div></div>
+      <div class="prose">
+        <p>Our vision is to be recognized as one of the best chemistry programs in the University and the State — with acknowledged excellence in <strong>research, instruction, and outreach</strong>.</p>
+        <p>We are a department of roughly 20 permanent faculty and staff (plus about 21 part-time faculty) serving ~98 undergraduate majors and ~30 graduate students, with about $3M in annual research funding.</p>
+      </div>
+      <div class="impact">
+        <span class="eyebrow">Areas of impact</span>
+        <div class="chips">{areasOfImpact.map((a) => <span class="chip">{a}</span>)}</div>
+      </div>
+    </div>
+  </section>
+
+  <ChairMessage />
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Facts & outcomes</span><h2>By the numbers</h2></div></div>
+      <div class="infogrid">
+        <div class="ig"><b>~98</b><span>Undergraduate majors</span></div>
+        <div class="ig"><b>~30</b><span>Graduate students</span></div>
+        <div class="ig"><b>~$3M</b><span>Annual research funding (NSF · NIH · DoD · DOE)</span></div>
+        <div class="ig"><b>~20 + 21</b><span>Permanent faculty/staff + part-time faculty</span></div>
+        <div class="ig"><b>ACS-certified</b><span>Undergraduate curriculum</span></div>
+        <div class="ig"><b>Astronaut & Goldwater</b><span>Scholar alumni</span></div>
+      </div>
+      <div class="prose" style="margin-top:26px">
+        <h3 class="subhead" style="font-size:18px">Where our graduates go</h3>
+        <p>An ACS-certified degree and research experience prepare our students for PhD and professional programs — including medical, dental, and pharmacy school — and for careers in pharmaceuticals, materials, energy, environmental science, and education.</p>
+      </div>
+      <p class="note" style="margin-top:18px"><b>Outcomes data:</b> graduation rate, average time-to-degree, and a named list of graduate-school and employer destinations are being compiled with the college for publication.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Accreditation</span><h2>ACS-certified</h2></div></div>
+      <div class="prose"><p>Our undergraduate curriculum is certified by the American Chemical Society — a national mark of rigor for employers and graduate programs.</p></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Contact & directions</span><h2>Find us</h2></div><p><a class="lnk" href="/contact">All contacts &rarr;</a></p></div>
+      <div class="infogrid">
+        {contacts.map((c) => (
+          <div class="ig"><b>{c.role}</b><span>{c.name}{c.phone ? ' · ' + c.phone : ''}{c.office ? ' · ' + c.office : ''}</span></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <NextStep eyebrow="Next in the story" title="See what you can <span class='g'>study.</span>" href="/academics" cta="Explore academics" />
+</SiteLayout>

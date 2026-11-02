@@ -1,0 +1,77 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { faculty, categoryLabels } from '../../data/faculty';
+import type { Person } from '../../data/faculty';
+
+export function getStaticPaths() {
+  return faculty.map((f) => ({ params: { slug: f.slug }, props: { f } }));
+}
+interface Props { f: Person; }
+const { f } = Astro.props;
+const tbc = '<span class="tbc">to be confirmed</span>';
+const areaId = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+---
+<SiteLayout title={`${f.name} · Department of Chemistry · NC A&T`} description={`${f.name}, ${f.title} in the Department of Chemistry at North Carolina A&T State University.`}>
+  <section class="page-head">
+    <div class="wrap">
+      <div class="crumb"><a href="/">Home</a><span>/</span><a href="/people">People</a><span>/</span>{f.name}</div>
+      <span class="eyebrow">{f.title}</span>
+      <h1>{f.name}</h1>
+      <div class="tags" style="margin-top:16px">
+        <span class="tagpill">{categoryLabels[f.category]}</span>
+        {f.areas.map((a) => <a class="tagpill" href={`/research#${areaId(a)}`}>{a}</a>)}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="profile">
+        <aside class="side">
+          {f.photo
+            ? <div class="photo ph pphoto has-img"><img src={f.photo} alt={`Portrait of ${f.name}`} decoding="async" /></div>
+            : <div class="photo ph pphoto"><span class="cap">PHOTO — headshot</span></div>}
+          <div class="contactcard">
+            <h4>Contact</h4>
+            <div class="crow"><b>Email</b>{f.email ? <a href={`mailto:${f.email}`}>{f.email}</a> : <Fragment set:html={tbc} />}</div>
+            <div class="crow"><b>Phone</b>{f.phone ? <span>{f.phone}</span> : <Fragment set:html={tbc} />}</div>
+            <div class="crow"><b>Office</b>{f.office ? <span>{f.office}</span> : <Fragment set:html={tbc} />}</div>
+            <div class="crow"><b>Department</b><span>Chemistry · College of Science &amp; Technology</span></div>
+          </div>
+          <div class="contactcard">
+            <h4>Scholarly links</h4>
+            <div class="scholarlinks">
+              {f.scholar ? <a class="lnk" href={f.scholar}>Google Scholar &rarr;</a> : <span class="tbc">Google Scholar — add link</span>}
+              {f.orcid ? <a class="lnk" href={f.orcid}>ORCID &rarr;</a> : <span class="tbc">ORCID — add link</span>}
+              {f.lab && <a class="lnk" href={f.lab}>Lab / group &rarr;</a>}
+            </div>
+          </div>
+        </aside>
+
+        <div class="main">
+          <span class="eyebrow">Research</span>
+          {f.draftQuestion
+            ? <><p class="rq">{f.draftQuestion}</p>
+                <p style="color:var(--muted);font-size:14px;font-family:'Space Mono',monospace">Profile copy is a draft — to be reviewed and approved by the faculty member.</p></>
+            : <p class="tbc">A research summary for this profile is being prepared.</p>}
+
+          <h3 class="subhead" style="margin-top:36px">Selected publications</h3>
+          {f.pubs.length > 0
+            ? <ul class="pubs">{f.pubs.map((p) => (
+                <li>{p.title}<div class="meta">{p.authors} · {p.venue}, {p.year}{p.doi ? <> · <a class="lnk" href={p.doi}>DOI</a></> : null}</div></li>
+              ))}</ul>
+            : <p class="tbc">Selected publications will appear here — see the scholarly links in the sidebar.</p>}
+
+          <h3 class="subhead" style="margin-top:36px">Courses taught</h3>
+          {f.courses.length > 0
+            ? <ul class="pubs">{f.courses.map((c) => <li>{c}</li>)}</ul>
+            : <p class="tbc">Courses taught will be listed here.</p>}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="nextstep">
+    <div class="wrap"><a class="nextcard card" href="/people"><h2>Back to the directory</h2><span class="go">All faculty &amp; staff &rarr;</span></a></div>
+  </section>
+</SiteLayout>

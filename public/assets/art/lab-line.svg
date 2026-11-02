@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" width="520" height="420" role="img" aria-label="Line-art chemistry glassware">
+  <rect width="520" height="420" fill="#FBFAF6"/>
+  <g fill="none" stroke="#004684" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- erlenmeyer -->
+    <path d="M120 80 v60 L70 300 a14 14 0 0 0 13 21 h94 a14 14 0 0 0 13-21 L153 140 V80"/>
+    <line x1="108" y1="80" x2="165" y2="80"/>
+    <!-- beaker -->
+    <path d="M250 150 v150 a12 12 0 0 0 12 12 h70 a12 12 0 0 0 12-12 V150"/>
+    <line x1="244" y1="150" x2="350" y2="150"/>
+    <line x1="320" y1="150" x2="320" y2="165"/>
+    <!-- test tube -->
+    <path d="M398 110 v160 a22 22 0 0 0 44 0 V110"/>
+    <line x1="390" y1="110" x2="450" y2="110"/>
+  </g>
+  <!-- liquids in gold -->
+  <path d="M86 250 L137 250 L168 300 a14 14 0 0 1-13 21 H99 a14 14 0 0 1-13-21 Z" fill="#FDB927" opacity=".9"/>
+  <path d="M250 235 h94 v65 a12 12 0 0 1-12 12 h-70 a12 12 0 0 1-12-12 Z" fill="#FDB927" opacity=".55"/>
+  <path d="M398 215 v55 a22 22 0 0 0 44 0 v-55 Z" fill="#FDB927" opacity=".75"/>
+  <!-- bubbles -->
+  <g fill="#004684"><circle cx="120" cy="285" r="4"/><circle cx="135" cy="300" r="3"/><circle cx="300" cy="270" r="4"/><circle cx="420" cy="245" r="3.5"/></g>
+  <!-- molecule accent -->
+  <g stroke="#FDB927" stroke-width="2.5" fill="#FDB927">
+    <line x1="40" y1="60" x2="80" y2="40" stroke-linecap="round"/><line x1="80" y1="40" x2="120" y2="55" stroke-linecap="round"/>
+    <circle cx="40" cy="60" r="5"/><circle cx="80" cy="40" r="6"/><circle cx="120" cy="55" r="5"/>
+  </g>
+</svg>

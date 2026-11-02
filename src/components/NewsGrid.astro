@@ -1,0 +1,21 @@
+---
+import { news } from '../data/news';
+const { heading = true } = Astro.props;
+---
+<section id="news" style="padding-bottom:46px" aria-labelledby="news-h">
+  <div class="wrap">
+    {heading && (
+      <div class="lede"><div><span class="eyebrow">News</span><h2 id="news-h">Latest from the <span class="g">department.</span></h2></div><p><a class="lnk" href="/news">All news &rarr;</a></p></div>
+    )}
+    <div class="ngrid">
+      {news.map((a) => (
+        <a class="ncard card" href={`/news/${a.slug}`}>
+          <div class={a.img ? 'photo ph has-img' : 'photo ph'}>
+            {a.img ? <img src={a.img} alt={a.alt} loading="lazy" decoding="async" /> : <span class="cap">PHOTO</span>}
+          </div>
+          <div class="tx"><span class="dt">{a.date} · {a.category}</span><h3>{a.title}</h3><span class="more">Read story &rarr;</span></div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

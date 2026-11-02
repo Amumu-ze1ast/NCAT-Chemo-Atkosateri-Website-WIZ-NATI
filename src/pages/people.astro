@@ -1,0 +1,54 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import FacultyCard from '../components/FacultyCard.astro';
+import NextStep from '../components/NextStep.astro';
+import { faculty, facultyAreas, categoryLabels } from '../data/faculty';
+const groups = ['faculty', 'teaching', 'research-staff', 'staff'];
+---
+<SiteLayout title="People · Department of Chemistry · NC A&T">
+  <PageHeader eyebrow="People" title="The minds behind the <span class='g'>work.</span>" crumb="People"
+    intro="Around 20 faculty and staff across five areas of chemistry. Filter the faculty by research area, then open a profile." />
+
+  <section style="padding-bottom:40px">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Faculty directory</span><h2>{categoryLabels['faculty']}</h2></div></div>
+      <div class="ffilter" role="group" aria-label="Filter faculty by research area">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        {facultyAreas.map((a) => <button type="button" data-filter={a} aria-pressed="false">{a}</button>)}
+      </div>
+      <div class="pgrid" id="faculty-grid">
+        {faculty.filter((f) => f.category === 'faculty').map((f) => <FacultyCard f={f} />)}
+      </div>
+    </div>
+  </section>
+
+  {groups.slice(1).map((g) => (
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="lede"><div><span class="eyebrow">Team</span><h2>{categoryLabels[g]}</h2></div></div>
+        <div class="pgrid">{faculty.filter((f) => f.category === g).map((f) => <FacultyCard f={f} />)}</div>
+      </div>
+    </section>
+  ))}
+
+  <section style="padding-top:0"><div class="wrap">
+    <p class="note"><b>More to come:</b> a graduate-student directory, along with headshots, contact details, and Google&nbsp;Scholar / ORCID links and selected publications on each profile, is being added as we confirm details with each person.</p>
+  </div></section>
+
+  <NextStep eyebrow="Next in the story" title="See what's <span class='g'>happening now.</span>" href="/news" cta="Read the news" />
+</SiteLayout>
+
+<script>
+  const chips = Array.from(document.querySelectorAll('.ffilter button'));
+  const cards = Array.from(document.querySelectorAll('#faculty-grid [data-areas]'));
+  chips.forEach((chip) => chip.addEventListener('click', () => {
+    chips.forEach((c) => c.setAttribute('aria-pressed', 'false'));
+    chip.setAttribute('aria-pressed', 'true');
+    const f = chip.getAttribute('data-filter');
+    cards.forEach((card) => {
+      const areas = (card.getAttribute('data-areas') || '').split('|');
+      card.style.display = (f === 'all' || areas.includes(f)) ? '' : 'none';
+    });
+  }));
+</script>

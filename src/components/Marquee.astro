@@ -1,0 +1,10 @@
+---
+import { marqueeItems } from '../data/site';
+// Four identical copies => translateX(-50%) loops seamlessly.
+const copies = [0, 1, 2, 3];
+---
+<div class="marquee" aria-hidden="true"><div class="track">
+  {copies.map(() => (
+    <>{marqueeItems.map((m) => <span set:html={`${m} <span class="d">&#9679;</span>`} />)}</>
+  ))}
+</div></div>

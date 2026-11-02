@@ -1,0 +1,18 @@
+---
+import { researchAreas } from '../data/site';
+const { heading = true } = Astro.props;
+const areaId = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+---
+<section id="research" aria-labelledby="res-h">
+  <div class="wrap">
+    {heading && (
+      <div class="lede"><div><span class="eyebrow">Research areas</span><h2 id="res-h">Every area is a <span class="g">node.</span></h2></div>
+        <p>~$3M in funding from NSF, NIH, DoD, and DOE. Select an area for its people, projects, and papers.</p></div>
+    )}
+    <div class="rlist">
+      {researchAreas.map((r) => (
+        <a class="rrow" href={`/research#${areaId(r.title)}`}><span class="rn">{r.n}</span><h3>{r.title}</h3><span class="rd">{r.desc}</span><span class="ra">Explore &rarr;</span></a>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,10 @@
+---
+import { trust } from '../data/site';
+---
+<section style="padding-top:0" aria-label="Recognition and outcomes">
+  <div class="wrap"><div class="trust">
+    {trust.map((t) => (
+      <div class="ti"><b set:html={t.b} /><span>{t.span}</span></div>
+    ))}
+  </div></div>
+</section>

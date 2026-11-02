@@ -1,0 +1,13 @@
+---
+import { nav } from '../data/site';
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isCurrent = (href) => href !== '/' && path.startsWith(href);
+---
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="scrim" data-close></div>
+  <nav class="panel-d" aria-label="Mobile">
+    <button class="close" id="close-drawer" aria-label="Close menu">&times;</button>
+    {nav.map((n) => <a href={n.href} aria-current={isCurrent(n.href) ? 'true' : undefined} set:html={n.label} />)}
+    <a class="btn" href="/apply" style="margin-top:16px">Apply &#8599;</a><a class="btn btn-ghost" href="/give" style="margin-top:4px">Give</a>
+  </nav>
+</div>

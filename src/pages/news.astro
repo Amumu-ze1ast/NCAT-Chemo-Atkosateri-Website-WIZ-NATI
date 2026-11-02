@@ -1,0 +1,42 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import NewsGrid from '../components/NewsGrid.astro';
+import EventsList from '../components/EventsList.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<SiteLayout title="News & Events · Department of Chemistry · NC A&T">
+  <PageHeader
+    eyebrow="News & events"
+    title="What's <span class='g'>happening.</span>"
+    crumb="News & Events"
+    intro="Department news, the seminar series, student and faculty achievements, upcoming deadlines, and open positions."
+  />
+
+  <section style="padding-bottom:0">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">News</span><h2>Latest from the <span class="g">department.</span></h2></div></div>
+    </div>
+  </section>
+  <NewsGrid heading={false} />
+
+  <section>
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Events</span><h2>Upcoming <span class="g">calendar.</span></h2></div></div>
+    </div>
+  </section>
+  <EventsList heading={false} />
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">More</span><h2>Series, achievements & <span class="g">openings.</span></h2></div></div>
+      <div class="cardgrid">
+        <div class="card pcardx"><span class="k">Seminar series</span><h3>Seminars & colloquia</h3><p>Recurring seminar schedule and speakers.</p></div>
+        <div class="card pcardx"><span class="k">Achievements</span><h3>Student & faculty wins</h3><p>Awards, scholarships, grants.</p></div>
+        <div class="card pcardx"><span class="k">Openings</span><h3>Positions</h3><p>Faculty, postdoc, and student/grad openings.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</SiteLayout>

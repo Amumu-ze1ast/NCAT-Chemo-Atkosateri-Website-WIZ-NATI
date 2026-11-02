@@ -1,0 +1,14 @@
+---
+import { gallery } from '../data/site';
+---
+<section style="padding-top:0" aria-labelledby="gal-h">
+  <div class="wrap"><div class="lede"><div><span class="eyebrow">Life in the department</span><h2 id="gal-h">In the lab &amp; <span class="g">beyond.</span></h2></div></div></div>
+  <div class="wrap gallery-wrap">
+    <div class="gallery" id="gallery" tabindex="0" aria-label="Photo gallery, scrollable">
+      {gallery.map((g) => (
+        <div class="photo has-img"><img src={g.src} alt={g.alt} loading="lazy" decoding="async" /><span class="cap" set:html={g.cap} /></div>
+      ))}
+    </div>
+    <div class="gal-ctrl" aria-hidden="true"><button id="gal-prev" aria-label="Scroll gallery left">&larr;</button><button id="gal-next" aria-label="Scroll gallery right">&rarr;</button></div>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import NextStep from '../components/NextStep.astro';
+import { undergradPrograms, gradPrograms, gradRequirements } from '../data/department';
+---
+<SiteLayout title="Academics · Department of Chemistry · NC A&T">
+  <PageHeader eyebrow="Academics" title="Programs that <span class='g'>build chemists.</span>" crumb="Academics"
+    intro="ACS-certified undergraduate tracks, thesis and teaching graduate degrees, and the advising that gets you through — with international applicants supported at every step." />
+
+  <section id="undergraduate">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Undergraduate</span><h2>Earn your BS</h2></div><p>Two BS tracks plus a minor — grounded in hands-on lab work from year one.</p></div>
+      <div class="cardgrid">
+        {undergradPrograms.map((p) => (
+          <div class="card pcardx"><span class="k">Undergraduate</span><h3>{p.title}</h3><p>{p.body}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0" id="graduate">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Graduate</span><h2>Go further</h2></div><p>MS and MAT degrees with assistantships and faculty advisors.</p></div>
+      <div class="twocol">
+        <div class="cardgrid two" style="grid-template-columns:1fr">
+          {gradPrograms.map((p) => (
+            <div class="card pcardx"><span class="k">Graduate</span><h3>{p.title}</h3><p>{p.body}</p></div>
+          ))}
+        </div>
+        <div>
+          <h3 class="subhead">Graduate requirements</h3>
+          <ul class="checklist">{gradRequirements.map((r) => <li>{r}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0" id="curriculum">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Undergraduate curriculum</span><h2>What you will study</h2></div><p>A representative arc of the ACS-certified BS. The official catalog and four-year plan are authoritative.</p></div>
+      <div class="cardgrid">
+        <div class="card pcardx"><span class="k">Years 1&ndash;2 · Foundations</span><h3>Core sciences</h3><p>General Chemistry I &amp; II, Organic Chemistry I &amp; II, calculus and calculus-based physics — each paired with laboratory work.</p></div>
+        <div class="card pcardx"><span class="k">Years 2&ndash;3 · Core chemistry</span><h3>The major fields</h3><p>Analytical, Physical, Inorganic, and Biochemistry, with the instrumentation and quantitative labs that anchor the certified degree.</p></div>
+        <div class="card pcardx"><span class="k">Years 3&ndash;4 · Depth &amp; research</span><h3>Electives &amp; capstone</h3><p>Advanced electives and faculty-mentored undergraduate research, presented at the annual Research Symposium.</p></div>
+      </div>
+      <p class="note" style="margin-top:18px"><b>Plan your courses:</b> the ACS Curriculum Guide, four-year plan, and full course catalog are maintained by the university and registrar. For the authoritative sequence and current scholarships or assistantships, <a class="lnk" href="/contact">talk to an advisor</a>.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Apply & advising</span><h2>Next steps</h2></div></div>
+      <div class="cardgrid">
+        <a class="path card pcardx" href="/apply"><span class="k">Apply</span><h3>How to apply</h3><p>Undergraduate & graduate steps, deadlines, and international (I-20 / visa) guidance.</p><span class="go">Start your application &rarr;</span></a>
+        <a class="path card pcardx" href="/contact"><span class="k">Current students</span><h3>Advising & the Override Form</h3><p>Course planning, the Chemistry Override Form, and student support.</p><span class="go">Get help &rarr;</span></a>
+        <a class="path card pcardx" href="/research"><span class="k">Research</span><h3>Undergraduate research</h3><p>Join a lab and present at the annual Research Symposium.</p><span class="go">See research &rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <NextStep eyebrow="Next in the story" title="Discover what we are <span class='g'>working on.</span>" href="/research" cta="Explore research" />
+</SiteLayout>

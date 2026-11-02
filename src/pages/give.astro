@@ -1,0 +1,27 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { social } from '../data/department';
+---
+<SiteLayout title="Give · Department of Chemistry · NC A&T">
+  <PageHeader eyebrow="Support us" title="Fuel the next <span class='g'>discovery.</span>" crumb="Give"
+    intro="Gifts to the Department of Chemistry support student scholarships, undergraduate research, and instrumentation in the New Science Building." />
+  <section>
+    <div class="wrap">
+      <div class="prose"><p>Every gift — large or small — helps an Aggie chemist get into the lab sooner. Contributions are made through the university's secure giving platform; designate the Department of Chemistry.</p></div>
+      <a class="btn" href={social.give} style="margin-top:10px">Give to NC A&T &#8599;</a>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Your impact</span><h2>Where your gift goes</h2></div></div>
+      <div class="cardgrid">
+        <div class="card pcardx"><span class="k">Students</span><h3>Scholarships</h3><p>Direct support that lets more students focus on coursework and research instead of cost.</p></div>
+        <div class="card pcardx"><span class="k">Research</span><h3>Undergraduate research</h3><p>Stipends, supplies, and travel so students can join a lab and present their work.</p></div>
+        <div class="card pcardx"><span class="k">Facilities</span><h3>Instrumentation</h3><p>Modern instruments in the New Science Building that keep training hands-on and current.</p></div>
+      </div>
+      <p class="note" style="margin-top:22px"><b>Planning a major or designated gift?</b> For the specific Chemistry fund designation and ways to direct your support, contact the department at <a class="lnk" href="mailto:chemdept@ncat.edu">chemdept@ncat.edu</a> and we will connect you with University Advancement.</p>
+    </div>
+  </section>
+</SiteLayout>

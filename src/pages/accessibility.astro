@@ -1,0 +1,29 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+<SiteLayout title="Accessibility · Department of Chemistry · NC A&T">
+  <PageHeader eyebrow="Accessibility" title="Built for <span class='g'>everyone.</span>" crumb="Accessibility"
+    intro="We are committed to meeting WCAG 2.2 AA and the requirements of ADA Title II and the UNC System." />
+  <section>
+    <div class="wrap"><div class="prose">
+      <p>This site is designed with semantic structure, keyboard support, visible focus styles, sufficient color contrast, reduced-motion support, and descriptive alternative text. We treat accessibility as an ongoing requirement, not a one-time check.</p>
+    </div>
+
+      <div class="lede" style="margin-top:8px"><div><span class="eyebrow">What we build for</span><h2>Our standards</h2></div></div>
+      <ul class="checklist">
+        <li>WCAG 2.2 AA as the baseline for every page</li>
+        <li>Full keyboard operability with a visible focus indicator</li>
+        <li>Color contrast that meets AA, with meaning never carried by color alone</li>
+        <li>Respect for reduced-motion and zoom / text-resize preferences</li>
+        <li>Descriptive alternative text and correct heading structure</li>
+      </ul>
+
+      <div class="lede" style="margin-top:34px"><div><span class="eyebrow">Report a barrier</span><h2>Tell us and we will fix it</h2></div></div>
+      <div class="prose">
+        <p>If any page or document is hard to use, email <a class="lnk" href="mailto:chemdept@ncat.edu?subject=Accessibility%20feedback">chemdept@ncat.edu</a> with the page address and a short description of the problem. We aim to respond promptly and provide the information in an accessible format.</p>
+      </div>
+      <p class="note" style="margin-top:18px"><b>University process:</b> the official NC A&amp;T accessibility statement and the formal ADA / Title&nbsp;II complaint procedure are maintained by the university — this departmental channel routes feedback to them. Confirm the authoritative statement language with University Relations before public launch.</p>
+    </div>
+  </section>
+</SiteLayout>

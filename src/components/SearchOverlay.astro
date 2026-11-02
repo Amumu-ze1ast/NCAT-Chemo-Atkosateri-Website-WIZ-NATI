@@ -1,0 +1,98 @@
+---
+// Live site search. Index is fetched once from /search-index.json (built at compile time).
+---
+<div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Site search">
+  <div class="scrim" data-close-search></div>
+  <div class="search-box">
+    <form role="search" onsubmit="return false">
+      <label for="site-search" style="position:absolute;left:-9999px">Search</label>
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" aria-hidden="true" style="width:22px;height:22px;flex:none"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="site-search" placeholder="Search people, research, programs…" autocomplete="off"
+        role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" />
+      <button class="icon-btn" id="close-search" type="button" aria-label="Close search">&times;</button>
+    </form>
+
+    <div class="sresults" id="search-results" role="listbox" aria-label="Search results" hidden></div>
+    <p class="snoresults" id="search-noresults" hidden>No matches. Try a name, a research area, or a program.</p>
+
+    <div class="sugg" aria-label="Suggested searches">
+      <a href="/research">Research areas</a><a href="/people">Faculty directory</a><a href="/academics">Graduate programs</a><a href="/apply">Apply</a><a href="/contact">Override form</a>
+    </div>
+    <p class="hint">Type to search · <b>↑ ↓</b> to navigate · <b>Enter</b> to open · <b>Esc</b> to close</p>
+  </div>
+</div>
+
+<script>
+  const ov = document.getElementById('search-overlay');
+  if (ov) {
+    const input = document.getElementById('site-search');
+    const resBox = document.getElementById('search-results');
+    const noRes = document.getElementById('search-noresults');
+    const sugg = ov.querySelector('.sugg');
+    let index = null, active = -1, current = [];
+
+    async function load() {
+      if (index) return;
+      try { const r = await fetch('/search-index.json'); index = await r.json(); }
+      catch (e) { index = []; }
+    }
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function score(rec, q, tokens) {
+      const t = rec.title.toLowerCase();
+      let s = 0;
+      if (t.indexOf(q) === 0) s += 100; else if (t.indexOf(q) >= 0) s += 50;
+      const sub = rec.sub.toLowerCase(), kw = rec.kw;
+      for (let i = 0; i < tokens.length; i++) {
+        const tok = tokens[i];
+        if (t.indexOf(tok) >= 0) s += 10;
+        if (sub.indexOf(tok) >= 0) s += 5;
+        if (kw.indexOf(tok) >= 0) s += 3;
+      }
+      return s;
+    }
+    function render() {
+      input.setAttribute('aria-expanded', current.length ? 'true' : 'false');
+      if (!input.value.trim()) { resBox.hidden = true; noRes.hidden = true; if (sugg) sugg.hidden = false; resBox.innerHTML = ''; input.removeAttribute('aria-activedescendant'); return; }
+      if (sugg) sugg.hidden = true;
+      if (!current.length) { resBox.hidden = true; resBox.innerHTML = ''; noRes.hidden = false; input.removeAttribute('aria-activedescendant'); return; }
+      noRes.hidden = true; resBox.hidden = false;
+      let html = '';
+      for (let i = 0; i < current.length; i++) {
+        const r = current[i];
+        html += '<a class="sresult" role="option" id="sr-' + i + '" aria-selected="' + (i === active) + '" href="' + r.url + '">'
+          + '<span class="stype">' + esc(r.type) + '</span>'
+          + '<span class="stitle">' + esc(r.title) + '</span>'
+          + '<span class="ssub">' + esc(r.sub) + '</span></a>';
+      }
+      resBox.innerHTML = html;
+      if (active >= 0) input.setAttribute('aria-activedescendant', 'sr-' + active);
+    }
+    async function run() {
+      await load();
+      const q = input.value.trim().toLowerCase();
+      if (!q) { current = []; active = -1; render(); return; }
+      const tokens = q.split(/\s+/);
+      current = index
+        .map(function (r) { return { r: r, s: score(r, q, tokens) }; })
+        .filter(function (x) { return x.s > 0; })
+        .sort(function (a, b) { return b.s - a.s; })
+        .slice(0, 8)
+        .map(function (x) { return x.r; });
+      active = current.length ? 0 : -1;
+      render();
+    }
+    input.addEventListener('input', run);
+    resBox.addEventListener('click', function () { ov.removeAttribute('open'); document.body.style.overflow = ''; });
+    input.addEventListener('focus', load);
+    input.addEventListener('keydown', function (e) {
+      if (!current.length) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); active = (active + 1) % current.length; render(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); active = (active - 1 + current.length) % current.length; render(); }
+      else if (e.key === 'Enter' && active >= 0) { e.preventDefault(); ov.removeAttribute('open'); document.body.style.overflow = ''; window.location.href = current[active].url; }
+    });
+    // Reset each time the overlay is opened (site.js toggles the [open] attribute).
+    new MutationObserver(function () {
+      if (ov.hasAttribute('open')) { input.value = ''; current = []; active = -1; render(); }
+    }).observe(ov, { attributes: true, attributeFilter: ['open'] });
+  }
+</script>

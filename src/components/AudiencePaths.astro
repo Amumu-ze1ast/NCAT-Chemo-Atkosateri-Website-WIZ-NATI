@@ -1,0 +1,20 @@
+---
+import { paths } from '../data/site';
+---
+<section id="about" aria-labelledby="paths-h">
+  <div class="wrap">
+    <div class="lede"><div><span class="eyebrow">Find your path</span><h2 id="paths-h">Where do you <span class="g">bond in?</span></h2></div>
+      <p>Four front doors — choose the one that fits, and we'll take you to exactly what you need.</p></div>
+    <div class="paths">
+      {paths.map((p) => (
+        <a class="path card" href={p.href}>
+          {p.tag && <span class="tag">{p.tag}</span>}
+          <span class="num">{p.num}</span>
+          <h3>{p.title}</h3>
+          <p>{p.body}</p>
+          <span class="go">{p.cta} &rarr;</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

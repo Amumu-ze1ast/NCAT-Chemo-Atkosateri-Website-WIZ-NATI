@@ -1,0 +1,28 @@
+---
+import { nav } from '../data/site';
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isCurrent = (href) => href !== '/' && path.startsWith(href);
+---
+<header id="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="NC A&T Department of Chemistry — home">
+      <img src="/assets/logos/lettermark-color-96.png" alt="NC A&T lettermark" />
+      <span class="bt">Chemistry<small>NC A&amp;T State University</small></span>
+    </a>
+    <nav class="main" aria-label="Primary">
+      {nav.map((n) => <a href={n.href} aria-current={isCurrent(n.href) ? 'true' : undefined} set:html={n.label} />)}
+    </nav>
+    <div class="util">
+      <button class="icon-btn theme-btn" id="theme-toggle" aria-label="Switch color theme">
+        <span class="moon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>
+        <span class="sun" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
+      </button>
+      <button class="icon-btn" id="open-search" aria-label="Search the site" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <a class="btn btn-ghost btn-sm util-give" href="/give">Give</a>
+      <a class="btn btn-sm" href="/apply">Apply &#8599;</a>
+      <button class="icon-btn menu-btn" id="open-drawer" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    </div>
+  </div>
+</header>

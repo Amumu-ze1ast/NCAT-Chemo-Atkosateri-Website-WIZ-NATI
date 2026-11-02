@@ -1,0 +1,96 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { contacts, social } from '../data/department';
+---
+<SiteLayout title="Contact · Department of Chemistry · NC A&T">
+  <PageHeader eyebrow="Contact" title="Talk to <span class='g'>us.</span>" crumb="Contact"
+    intro="Reach the right person directly, send us a message, or come visit us in the New Science Building on East Market Street." />
+
+  <section style="padding-bottom:42px">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Who to contact</span><h2>Reach the right person</h2></div></div>
+      <div class="ccards">
+        {contacts.map((c) => (
+          <div class="ccard card">
+            <span class="crole">{c.role}</span>
+            <h3>{c.name}</h3>
+            <ul class="clist">
+              {c.phone && <li><b>Phone</b><a href={'tel:' + c.phone.replace(/[^0-9]/g, '')}>{c.phone}</a></li>}
+              {c.email && <li><b>Email</b><a href={'mailto:' + c.email}>{c.email}</a></li>}
+              {c.office && <li><b>Office</b><span>{c.office}</span></li>}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="contact-form-card card">
+          <span class="eyebrow">Send a message</span>
+          <h2 class="subhead" style="margin-top:10px">We will get back to you</h2>
+          <p class="form-help">Use this form for general questions, prospective-student inquiries, and research or partnership ideas. For a registration override, use the panel on the right.</p>
+          <form id="contact-form" novalidate>
+            <div class="field"><label for="cf-name">Full name</label><input id="cf-name" name="name" type="text" autocomplete="name" required aria-required="true" aria-describedby="cf-name-err" /><span class="err" id="cf-name-err" role="alert"></span></div>
+            <div class="row2">
+              <div class="field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" autocomplete="email" required aria-required="true" aria-describedby="cf-email-err" /><span class="err" id="cf-email-err" role="alert"></span></div>
+              <div class="field"><label for="cf-subject">Subject</label><select id="cf-subject" name="subject"><option>General inquiry</option><option>Undergraduate studies</option><option>Graduate studies</option><option>Research / partnership</option><option>Course override</option></select></div>
+            </div>
+            <div class="field"><label for="cf-msg">Message</label><textarea id="cf-msg" name="message" rows="5" required aria-required="true" aria-describedby="cf-msg-err"></textarea><span class="err" id="cf-msg-err" role="alert"></span></div>
+            <button class="btn" type="submit" style="width:100%">Send message &#8599;</button>
+            <p class="ok" id="cf-ok" role="status">Thanks — your message is ready. <em>(Preview only; connect a form backend to deliver it.)</em></p>
+          </form>
+        </div>
+
+        <aside class="contact-aside">
+          <div class="card visit-card">
+            <span class="eyebrow">Visit</span>
+            <h3>New Science Building</h3>
+            <p>1601 East Market Street<br />Greensboro, NC 27411</p>
+            <ul class="clist hours">
+              <li><b>Hours</b><span>Mon&ndash;Fri &middot; 8&nbsp;a.m.&ndash;5&nbsp;p.m.</span></li>
+              <li><b>Office</b><a href="mailto:chemdept@ncat.edu">chemdept@ncat.edu</a></li>
+            </ul>
+            <div class="map"><iframe title="Map showing the New Science Building at NC A&T, 1601 East Market Street, Greensboro, NC 27411" src="https://www.google.com/maps?q=1601%20East%20Market%20Street%2C%20Greensboro%2C%20NC%2027411&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+          </div>
+          <div class="card visit-card override-card">
+            <span class="eyebrow">Course override</span>
+            <h3>Need a registration override?</h3>
+            <p>Email the department with your name, Banner ID, and the course and section number. We will route your request to the right instructor or coordinator.</p>
+            <a class="btn btn-ghost btn-sm" href="mailto:chemdept@ncat.edu?subject=Course%20override%20request">Request an override &#8599;</a>
+          </div>
+          <div class="card visit-card">
+            <span class="eyebrow">Connect</span>
+            <div class="visit-links">
+              <a class="lnk" href={social.x}>X · @NCATChemDept &rarr;</a>
+              <a class="lnk" href={social.facebook}>Facebook &rarr;</a>
+              <a class="lnk" href={social.linkedin}>LinkedIn &rarr;</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</SiteLayout>
+
+<script>
+  const form = document.getElementById('contact-form');
+  if (form) {
+    const nI = document.getElementById('cf-name'), eI = document.getElementById('cf-email'), mI = document.getElementById('cf-msg');
+    const nE = document.getElementById('cf-name-err'), eE = document.getElementById('cf-email-err'), mE = document.getElementById('cf-msg-err'), ok = document.getElementById('cf-ok');
+    function fail(i, el, m) { i.setAttribute('aria-invalid', 'true'); el.textContent = m; }
+    function clr(i, el) { i.removeAttribute('aria-invalid'); el.textContent = ''; }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); var bad = false;
+      if (!nI.value.trim()) { fail(nI, nE, 'Please enter your name.'); bad = true; } else clr(nI, nE);
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(eI.value)) { fail(eI, eE, 'Enter a valid email address.'); bad = true; } else clr(eI, eE);
+      if (!mI.value.trim()) { fail(mI, mE, 'Please enter a message.'); bad = true; } else clr(mI, mE);
+      if (bad) { return; }
+      ok.classList.add('show'); form.querySelector('button[type=submit]').textContent = 'Ready \u2713';
+    });
+    [nI, eI, mI].forEach(function (i) { i.addEventListener('input', function () { if (i.getAttribute('aria-invalid')) clr(i, i === nI ? nE : i === eI ? eE : mE); }); });
+  }
+</script>

@@ -1,0 +1,50 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import FacilitiesBanner from '../components/FacilitiesBanner.astro';
+import NewScienceBuilding from '../components/NewScienceBuilding.astro';
+import NextStep from '../components/NextStep.astro';
+import { researchAreas } from '../data/department';
+import { faculty } from '../data/faculty';
+const bySlug = Object.fromEntries(faculty.map((f) => [f.slug, f]));
+const areaId = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+---
+<SiteLayout title="Research · Department of Chemistry · NC A&T">
+  <PageHeader eyebrow="Research" title="Every area is a <span class='g'>node.</span>" crumb="Research"
+    intro="Roughly $3M in active funding from NSF, NIH, DoD, and DOE drives discovery across five areas — with undergraduates in the lab alongside faculty and graduate students." />
+
+  {researchAreas.map((a, i) => (
+    <section id={areaId(a.title)} style={i > 0 ? 'padding-top:0' : ''}>
+      <div class="wrap">
+        <div class="lede"><div><span class="eyebrow">{('0' + (i + 1)).slice(-2)} · Research area</span><h2>{a.title}</h2></div></div>
+        <div class="twocol">
+          <div class="prose"><p>{a.intro}</p>
+            <h3 class="subhead" style="font-size:18px;margin-top:22px">Representative topics</h3>
+            <ul class="checklist">{a.topics.map((t) => <li>{t}</li>)}</ul>
+          </div>
+          <div>
+            <h3 class="subhead" style="font-size:18px">Faculty in this area</h3>
+            {a.faculty.length > 0
+              ? <div class="arealist">{a.faculty.map((s) => bySlug[s] && (
+                  <a class="arearow" href={`/people/${s}`}><b>{bySlug[s].name}</b><span>{bySlug[s].title}</span></a>
+                ))}</div>
+              : <p class="tbc">Faculty for this area to be confirmed.</p>}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <FacilitiesBanner href="#facilities" />
+  <NewScienceBuilding />
+
+  <section id="facilities">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Facilities & publications</span><h2>Labs, instruments & papers</h2></div></div>
+      <div class="prose"><p>Research takes place in the New Science Building, where shared instrumentation supports synthesis, characterization, spectroscopy, and bioanalysis across all five areas. Individual research-group pages and a searchable publications feed are on the way.</p></div>
+      <p class="note" style="margin-top:18px"><b>In progress:</b> per-group pages, the full instrumentation list, and a dated, filterable publications feed (title, authors, venue, year, DOI) are being assembled. In the meantime, see scholarly links on each <a class="lnk" href="/people">faculty profile</a>.</p>
+    </div>
+  </section>
+
+  <NextStep eyebrow="Next in the story" title="Meet the people behind the <span class='g'>work.</span>" href="/people" cta="See our people" />
+</SiteLayout>

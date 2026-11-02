@@ -1,0 +1,20 @@
+---
+import { nav } from '../data/site';
+import { social } from '../data/department';
+---
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand"><img src="/assets/logos/lettermark-color-120.png" alt="NC A&T lettermark" />
+        <p>Department of Chemistry · New Science Building, 1601 East Market Street, Greensboro, NC 27411</p>
+        <p style="margin-top:10px"><a href="mailto:chemdept@ncat.edu" style="display:inline">chemdept@ncat.edu</a></p></div>
+      <div><h4>Explore</h4>{nav.map((l) => <a href={l.href} set:html={l.label} />)}</div>
+      <div><h4>Quick links</h4>
+        <a href="/apply">Apply</a><a href="/give">Give</a><a href="/people">Directory</a><a href="/contact">Chemistry Override Form</a><a href="/contact">Contact</a></div>
+      <div><h4>Connect</h4>
+        <a href={social.x}>X · @NCATChemDept</a><a href={social.linkedin}>LinkedIn</a><a href={social.facebook}>Facebook</a><a href="/accessibility">Accessibility statement</a><a href={social.university + 'legal/'}>Non-discrimination / Title IX</a><a href={social.university + 'legal/'}>Privacy</a></div>
+    </div>
+    <div class="fbar"><span>&copy; 2026 North Carolina A&amp;T State University · Department of Chemistry</span>
+      <span><a href="/contact">Feedback</a></span></div>
+  </div>
+</footer>

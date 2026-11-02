@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "Department of Chemistry · NC A&T State University",
+  description = "Department of Chemistry at North Carolina A&T State University — research that bonds. ACS-certified programs, $3M in funding, a community of discovery.",
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#02274a" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NC A&T Department of Chemistry" />
+  <meta property="og:title" content="Department of Chemistry · NC A&T State University" />
+  <meta property="og:description" content="ACS-certified programs, $3M in active research, and a community of discovery at the nation's largest HBCU." />
+  <meta property="og:image" content="/assets/logos/lettermark-color-600.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Department of Chemistry · NC A&T State University" />
+  <meta name="twitter:image" content="/assets/logos/lettermark-color-600.png" />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context":"https://schema.org","@type":"EducationalOrganization",
+    "name":"Department of Chemistry, North Carolina A&T State University",
+    "url":"https://www.ncat.edu/cost/departments/chemistry/",
+    "parentOrganization":{"@type":"CollegeOrUniversity","name":"North Carolina A&T State University"},
+    "department":{"@type":"EducationalOrganization","name":"College of Science and Technology"},
+    "email":"chemdept@ncat.edu",
+    "address":{"@type":"PostalAddress","streetAddress":"New Science Building, 1601 East Market Street","addressLocality":"Greensboro","addressRegion":"NC","postalCode":"27411","addressCountry":"US"},
+    "sameAs":["https://twitter.com/NCATChemDept"]
+  })} />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon-bond.svg" />
+  <link rel="alternate icon" href="/assets/favicons/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/favicons/apple-touch-icon.png" />
+  <!-- set theme before paint to avoid flash -->
+  <script is:inline>
+    (function(){try{var t=localStorage.getItem('ncat-theme');if(!t)t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Libre+Caslon+Display&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <slot />
+  <script>
+    import '../scripts/site.js';
+  </script>
+</body>
+</html>

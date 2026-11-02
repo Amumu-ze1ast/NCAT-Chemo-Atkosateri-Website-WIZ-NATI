@@ -1,0 +1,12 @@
+---
+interface Props { title: string; href: string; cta: string; }
+const { title, href, cta } = Astro.props;
+---
+<section class="nextstep" aria-label="Continue">
+  <div class="wrap">
+    <a class="nextcard card" href={href}>
+      <h2 set:html={title}></h2>
+      <span class="go">{cta} &rarr;</span>
+    </a>
+  </div>
+</section>

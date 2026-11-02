@@ -1,0 +1,44 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { social } from '../data/department';
+---
+<SiteLayout title="Apply · Department of Chemistry · NC A&T">
+  <PageHeader eyebrow="Apply" title="Join the <span class='g'>reaction.</span>" crumb="Apply"
+    intro="Applications to NC A&T are submitted through the university's admissions system. Pick your path below — international applicants are welcome in both." />
+  <section>
+    <div class="wrap">
+      <div class="cardgrid two">
+        <div class="card pcardx"><span class="k">Undergraduate</span><h3>Future undergraduate</h3><p>BS Chemistry (ACS or Biomedical/Biochemistry track) or the minor. Includes first-year and transfer applicants.</p><a class="btn" href={social.apply} style="margin-top:8px">Apply to NC A&T &#8599;</a></div>
+        <div class="card pcardx"><span class="k">Graduate</span><h3>Future graduate student</h3><p>MS and MAT in Chemistry, with assistantships. International applicants: visa / I-20 and English-proficiency guidance.</p><a class="btn" href={social.apply} style="margin-top:8px">Apply to NC A&T &#8599;</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="lede"><div><span class="eyebrow">Before you start</span><h2>What you will need</h2></div><p>A general guide — confirm program-specific requirements and dates on the official application portal.</p></div>
+      <div class="twocol">
+        <div>
+          <h3 class="subhead" style="font-size:18px">Undergraduate</h3>
+          <ul class="checklist">
+            <li>NC A&amp;T undergraduate application (first-year or transfer)</li>
+            <li>Official high-school and/or college transcripts</li>
+            <li>Test scores if required by your admission type</li>
+            <li>Transfer applicants: chemistry and math coursework for credit review</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="subhead" style="font-size:18px">Graduate (MS &amp; MAT)</h3>
+          <ul class="checklist">
+            <li>Graduate application with the application fee</li>
+            <li>Official transcripts from all institutions attended</li>
+            <li>Statement of purpose and letters of recommendation</li>
+            <li>International applicants: TOEFL/IELTS and visa / I-20 documentation</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note" style="margin-top:22px"><b>Deadlines &amp; test policy:</b> application deadlines, the assistantship timeline, and any GRE / English-test requirements are set per program and admission term. The department will confirm current details — <a class="lnk" href="/contact">ask our advisors</a> before you apply.</p>
+    </div>
+  </section>
+</SiteLayout>

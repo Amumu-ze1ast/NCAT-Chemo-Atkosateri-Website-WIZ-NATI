@@ -1,0 +1,18 @@
+---
+// Request-info form. Validation/submit handled in site.js (preview only).
+---
+<section style="padding-top:0" id="request" aria-labelledby="req-h">
+  <div class="wrap"><div class="req">
+    <div class="copy"><span class="eyebrow">Request information</span><h2 id="req-h" style="margin-top:14px">Tell us where to send the details.</h2>
+      <p>One short form. We'll follow up with program info, deadlines, and a real person to answer your questions — no spam.</p></div>
+    <form id="req-form" novalidate>
+      <div class="field"><label for="rf-name">Full name</label><input id="rf-name" name="name" type="text" autocomplete="name" required aria-required="true" aria-describedby="rf-name-err" /><span class="err" id="rf-name-err" role="alert"></span></div>
+      <div class="row2">
+        <div class="field"><label for="rf-email">Email</label><input id="rf-email" name="email" type="email" autocomplete="email" required aria-required="true" aria-describedby="rf-email-err" /><span class="err" id="rf-email-err" role="alert"></span></div>
+        <div class="field"><label for="rf-interest">I'm interested in</label><select id="rf-interest" name="interest"><option value="undergraduate">Undergraduate study</option><option value="graduate">Graduate study</option><option value="research">Research / partnership</option><option value="other">Something else</option></select></div>
+      </div>
+      <button class="btn" type="submit" style="width:100%">Request info &#8599;</button>
+      <p class="ok" id="rf-ok" role="status">Thanks — we've got it. Someone from Chemistry will be in touch. <em>(Preview only; no data was sent.)</em></p>
+    </form>
+  </div></div>
+</section>

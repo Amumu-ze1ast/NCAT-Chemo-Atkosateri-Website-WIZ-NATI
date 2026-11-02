@@ -1,0 +1,21 @@
+---
+import { featuredNews as f } from '../data/news';
+---
+<section id="news" aria-labelledby="fn-h">
+  <div class="wrap">
+    <div class="lede"><div><span class="eyebrow">News</span><h2 id="fn-h">Latest from the <span class="g">department.</span></h2></div>
+      <p><a class="lnk" href="/news">All news &rarr;</a></p></div>
+
+    <a class="feabox card" href={`/news/${f.slug}`} aria-label={f.title}>
+      <div class="fea-img photo has-img">
+        {f.img ? <img src={f.img} alt={f.alt} loading="lazy" decoding="async" /> : <span class="cap">PHOTO</span>}
+      </div>
+      <div class="fea-body">
+        <span class="fea-dt">{f.date} · {f.category}</span>
+        <h3>{f.title}</h3>
+        <p>{f.excerpt}</p>
+        <span class="more">Read story &rarr;</span>
+      </div>
+    </a>
+  </div>
+</section>

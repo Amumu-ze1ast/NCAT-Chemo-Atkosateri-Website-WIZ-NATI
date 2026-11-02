@@ -1,0 +1,15 @@
+---
+import type { Faculty } from '../data/faculty';
+interface Props { f: Faculty; }
+const { f } = Astro.props;
+---
+<a class="pcard card fcard" href={`/people/${f.slug}`} data-areas={f.areas.join('|')}>
+  {f.photo
+    ? <div class="photo ph has-img"><img src={f.photo} alt={`Portrait of ${f.name}`} loading="lazy" decoding="async" /></div>
+    : <div class="photo ph"><span class="cap">PHOTO</span></div>}
+  <div class="tx">
+    <div class="nm">{f.name}</div>
+    <div class="ro">{f.title}</div>
+    <div class="tags">{f.areas.map((a) => <span class="tagpill">{a}</span>)}</div>
+  </div>
+</a>
